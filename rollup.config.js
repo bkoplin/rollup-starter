@@ -1,12 +1,12 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import alias from '@rollup/plugin-alias';
+import babel from '@rollup/plugin-babel';
+import typescript from '@rollup/plugin-typescript';
 
-import babel from 'rollup-plugin-babel';
-import typescript from 'rollup-plugin-typescript2';
-
-import { eslint } from 'rollup-plugin-eslint';
 import { terser } from 'rollup-plugin-terser';
+import klawSync from 'klaw-sync';
+import path from 'path';
 
 import pkg from './package.json';
 
@@ -26,10 +26,6 @@ export default {
       sourcemap: true,
     },
   ],
-  external: [
-    ...Object.keys(pkg.dependencies || {}),
-    ...Object.keys(pkg.peerDependencies || {}),
-  ],
   plugins: [
     alias({
       entries: {
@@ -37,8 +33,7 @@ export default {
       },
       resolve: extensions,
     }),
-    eslint(),
-    typescript({ rollupCommonJSResolveHack: true, clean: true }),
+    typescript({tsconfig: "tsconfig.json" }),
     babel({
       extensions,
       exclude: 'node_modules/**',

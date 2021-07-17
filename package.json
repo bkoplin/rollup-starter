@@ -38,5 +38,8 @@
     "rollup-plugin-eslint": "^7.0.0",
     "rollup-plugin-terser": "^7.0.2",
     "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "@antfu/eslint-config": "^0.7.0"
   }
 }
